@@ -11,6 +11,7 @@ from win32api import GetSystemMetrics
 import keyboard
 import mouse
 import reinforcement_learning.environment_helper as env_helper
+import numpy as np
 from img import images
 from logic import collisions
 from objects.ball import Ball
@@ -41,7 +42,8 @@ def listen(running):
         # elif event.type == sounds.END_FLAG:
         #     sounds.changeMusic(sounds.overtureLoopTime)
         else:
-            keyboard.listen(event)
+            if not config.AUTONOMOUS_MODE:
+                keyboard.listen(event)
             mouse.listen()
     return running
 
@@ -91,8 +93,7 @@ def main():
     bricks = [Brick(30, 160, 95, 36, 30 + 48, 30 + 95 - 48)]
 
     while running:
-        if not config.AUTONOMOUS_MODE:
-            running = listen(running)
+        running = listen(running)
 
         if state == config.TITLE_SCREEN:
             display.blit(images.menu, (0, 0))
@@ -103,6 +104,8 @@ def main():
         elif state == config.STAGE_ONE:
 
             # Game Logic
+            if mouse.mouse['click'] and ball.launching and ball.spd[1] == 0:
+                ball.spd[1] = np.random.uniform(-16.0, -8.0)
             if keyboard.controls['keySpace'] and ball.launching and ball.spd[1] == 0:
                 ball.spd[1] = -14
 
@@ -175,7 +178,7 @@ def main():
         # Update Window
         pygame.display.update()
         # input()
-        clock.tick(10)
+        clock.tick(60)
 
     pygame.quit()
 

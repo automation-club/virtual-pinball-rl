@@ -3,7 +3,7 @@ import pygame
 pygame.font.init()
 
 # GAMEPLAY
-AUTONOMOUS_MODE = False  # Toggle True to disable keyboard input and allow AI to takeover gameplay
+AUTONOMOUS_MODE = True  # Toggle True to disable keyboard input and allow AI to takeover gameplay
 
 # GENERAL VARIABLES
 gameW, gameH = 400, 600

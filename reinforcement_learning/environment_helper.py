@@ -48,7 +48,7 @@ def make_observation(display):
 def take_action(observation):
     global flipper_state
     # TODO: Implement RL inference
-    x = np.array([0, 0, 0, 0])
+    x = np.array([0, 0, 0, 3])
     flipper_state = np.argmax(x)
 
 
