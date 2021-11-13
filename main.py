@@ -1,5 +1,6 @@
 import pygame, constants, math
 import keyboard, mouse
+import pygame.camera
 from pygame import gfxdraw
 from logic import collisions
 from img import images
@@ -9,6 +10,8 @@ from objects.flipper import Flipper
 from objects.ball import Ball
 from objects.bumper import Bumper
 from objects.brick import Brick
+
+# TODO: Configure User/Agent Play Inputs
 
 # Window will spawn in exact center
 import os
@@ -92,6 +95,13 @@ def main():
 
         elif state == constants.STAGE_ONE:
 
+            # PyGame Display Capture Code
+            string_image = pygame.image.tostring(ctx, 'RGB')
+            tmp_surf = pygame.image.fromstring(string_image, (constants.gameW, constants.gameH), 'RGB')
+            tmp_arr = pygame.surfarray.array3d(tmp_surf)
+            print(tmp_arr.shape)
+
+            # Game Logic
             if keyboard.controls['keySpace'] and ball.launching and ball.spd[1] == 0:
                 ball.spd[1] = -14
 
@@ -161,7 +171,7 @@ def main():
         # Update Window
         pygame.display.update()
         # input()
-        clock.tick(60)
+        clock.tick(10)
 
     pygame.quit()
 
