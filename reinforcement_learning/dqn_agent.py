@@ -11,3 +11,7 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 
 # TODO: model class?
+
+
+def inference(image_arr):
+    return np.array([0,0,0,0])

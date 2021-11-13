@@ -2,7 +2,7 @@ import pygame, math
 from img import images
 from objects.rect import Rect
 from objects.bullet import Bullet
-import constants
+import config
 
 class Actor(Rect):
     def __init__(self,x,y,w,h,color,img,maxHP,spd=[0,0],name="actor"):

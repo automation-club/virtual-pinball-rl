@@ -1,9 +1,9 @@
-import pygame, constants
+import pygame, config
 
 # ball = pygame.transform.scale(pygame.image.load("img/ball.png"),(40,40))
-menu = pygame.transform.scale(pygame.image.load("img/menu.png"),(constants.gameW,constants.gameH))
+menu = pygame.transform.scale(pygame.image.load("img/menu.png"), (config.gameW, config.gameH))
 playButton = pygame.transform.scale(pygame.image.load("img/playbutton.png"),(int(0.3*703),int(0.3*212)))
-gameOver = pygame.transform.scale(pygame.image.load("img/GAMEOVER.png"),(constants.gameW,constants.gameH))
+gameOver = pygame.transform.scale(pygame.image.load("img/GAMEOVER.png"), (config.gameW, config.gameH))
 
 brick = pygame.transform.scale(pygame.image.load("img/redthingy.png"),(int(0.3*318),int(0.3*121)))
 burst = pygame.transform.scale(pygame.image.load("img/blueburst.png"),(int(0.3*338),int(0.3*338)))

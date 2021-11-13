@@ -1,4 +1,5 @@
-import pygame, math, constants, copy, keyboard
+import pygame, math, config, copy, keyboard
+import reinforcement_learning.environment_helper as env_helper
 from pygame import gfxdraw
 from logic import collisions
 from logic.graphics import sortByX, sortByY
@@ -46,20 +47,28 @@ class Flipper(Rect):
 
         return coOrds
 
-    def isActive(self):
-        if (self.name == "L" and keyboard.leftFlipper()) or (self.name == "R" and keyboard.rightFlipper()):
-            return True
+    def is_active(self):
+        if config.AUTONOMOUS_MODE:
+            if self.name == "L" and (env_helper.get_flipper_state() == 1 or env_helper.get_flipper_state() == 3):
+                return True
+            if self.name == "R" and (env_helper.get_flipper_state() == 2 or env_helper.get_flipper_state() == 3):
+                return True
+            else:
+                return False
         else:
-            return False
+            if (self.name == "L" and keyboard.leftFlipper()) or (self.name == "R" and keyboard.rightFlipper()):
+                return True
+            else:
+                return False
 
     def currentCoords(self):
-        if self.isActive():
+        if self.is_active():
             return self.activeAngleCoords
         else:
             return self.angleCoords
 
     def getAngle(self):
-        if self.isActive():
+        if self.is_active():
             return self.activeAngle
         else:
             return self.angle
@@ -71,7 +80,7 @@ class Flipper(Rect):
 
     def draw(self, ctx):
 
-        if self.isActive():
+        if self.is_active():
             gfxdraw.filled_polygon(ctx, self.activeAngleCoords, self.color)
             gfxdraw.aapolygon(ctx, self.activeAngleCoords, self.color)
         else:
@@ -79,7 +88,7 @@ class Flipper(Rect):
             gfxdraw.aapolygon(ctx, self.angleCoords, self.color)
 
     def go(self, ctx, ball):
-        if self.isActive():
+        if self.is_active():
             if self.inactiveRecent > 0 and self.cooldown == 0:
                 ball.checkFlipperHit(self)
                 self.inactiveRecent -= 1
@@ -89,3 +98,4 @@ class Flipper(Rect):
         if self.cooldown > 0:
             self.cooldown -= 1
         super().go(ctx)
+

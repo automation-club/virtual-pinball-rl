@@ -1,4 +1,4 @@
-import pygame, constants, copy, math, mouse
+import pygame, config, copy, math, mouse
 from logic import collisions
 from logic.graphics import sortByX, sortByY
 from pygame import gfxdraw
@@ -17,14 +17,14 @@ class Ball(Circle):
         self.launching = True
 
     def reset(self):
-        self.x = constants.gameW - 20
-        self.y = constants.gameH - 60
+        self.x = config.gameW - 20
+        self.y = config.gameH - 60
         self.spd = [0, 0]
         self.launching = True
 
     def accelerate(self):
         pass
-        self.spd[1] += constants.TABLE_ACCELERATION
+        self.spd[1] += config.TABLE_ACCELERATION
 
     def checkFlipperHit(self, flipper):
         flipCoords = copy.deepcopy(flipper.angleCoords)
@@ -117,7 +117,7 @@ class Ball(Circle):
             if self.y <= 47:
                 self.spd[0] = -8
                 self.spd[1] = -1
-            if self.x <= constants.gameW - (40 + self.r):
+            if self.x <= config.gameW - (40 + self.r):
                 self.launching = False
         else:
             self.accelerate()

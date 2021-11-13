@@ -1,4 +1,4 @@
-import pygame, constants
+import pygame, config
 from pygame import gfxdraw
 from logic import collisions
 from objects.entity import Entity
@@ -14,7 +14,7 @@ class Rect(Entity):
         for o in room["obstructions"]:
             if collisions.rectangles(self,o):
                 return False
-        if self.x < 0 or self.y < 0 or self.x + self.w > constants.gameW or self.y + self.h > constants.gameH:
+        if self.x < 0 or self.y < 0 or self.x + self.w > config.gameW or self.y + self.h > config.gameH:
             return False
         return True
 

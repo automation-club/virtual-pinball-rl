@@ -13,6 +13,7 @@ Observation Space:
         All entries are between [0, 256]
 
 Action Space:
+    Whichever index is non-zero is the course of action decided by the RL Agent
     Type: NumPy Array (4)
     Num        Action
     0          Idle
@@ -28,18 +29,29 @@ Reward:
 """
 
 import pygame
-import constants
+import config
 import numpy as np
 from numpy.typing import NDArray
 
+# Tells flipper.py which flippers are activated
+flipper_state = None
 
-def observation_space(display):
+
+def make_observation(display):
     string_image = pygame.image.tostring(display, 'RGB')
-    tmp_surf = pygame.image.fromstring(string_image, (constants.gameW, constants.gameH), 'RGB')
+    tmp_surf = pygame.image.fromstring(string_image, (config.gameW, config.gameH), 'RGB')
     image_arr = pygame.surfarray.array3d(tmp_surf)
 
     return image_arr
 
 
-def take_action(action_arr: NDArray):
-    action = np.argmax(action_arr)
+def take_action(observation):
+    global flipper_state
+    # TODO: Implement RL inference
+    x = np.array([0, 0, 0, 0])
+    flipper_state = np.argmax(x)
+
+
+def get_flipper_state():
+    global flipper_state
+    return flipper_state

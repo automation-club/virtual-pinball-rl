@@ -1,4 +1,4 @@
-import pygame, constants
+import pygame, config
 from pygame import gfxdraw
 from img import images
 from logic import collisions

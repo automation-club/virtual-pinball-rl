@@ -1,4 +1,4 @@
-import pygame, constants
+import pygame, config
 from logic import collisions
 from img import images
 from sound import sounds
@@ -6,7 +6,7 @@ from objects.rect import Rect
 
 class Item(Rect):
     def __init__(self,id,w,xShift=0,yShift=0,name="item"):
-        super().__init__((constants.gameW-w)/2+xShift,(constants.gameH-w)/2+yShift,w,w,None,None,[0,0],name)
+        super().__init__((config.gameW - w) / 2 + xShift, (config.gameH - w) / 2 + yShift, w, w, None, None, [0, 0], name)
         self.id = id
         self.consumedFlag = False
 
