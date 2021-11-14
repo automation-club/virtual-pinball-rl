@@ -5,6 +5,12 @@ pygame.font.init()
 # GAMEPLAY
 AUTONOMOUS_MODE = True  # Toggle True to disable keyboard input and allow AI to takeover gameplay
 
+# RANDOM SEED
+RANDOM_SEED = 123
+
+# REINFORCEMENT LEARNING VARIABLES
+MAX_MEMORY_LEN = 50000
+
 # GENERAL VARIABLES
 gameW, gameH = 400, 600
 playerW, playerH = 60, 120

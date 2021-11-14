@@ -20,6 +20,7 @@ from objects.bumper import Bumper
 from objects.flipper import Flipper
 from objects.polygon import Polygon
 from objects.rect import Rect
+from matplotlib import pyplot as plt
 
 windowX = GetSystemMetrics(0) / 2 - config.gameW / 2
 windowY = GetSystemMetrics(1) / 2 - config.gameH / 2
@@ -51,6 +52,9 @@ def listen(running):
 def main():
     # pygame.mixer.music.play()
     # midline = Rect(199,0,2,600,(0,0,0))
+
+    import torch
+    print("CUDA is available: ", torch.cuda.is_available())
 
     running = True
     ballsLeft = 2
@@ -125,6 +129,8 @@ def main():
 
             # Flipper actions are decided here through either keyboard input or RL Agent
             observation = env_helper.make_observation(display)
+            plt.imshow(observation)
+            plt.show()
             env_helper.take_action(observation)
             for f in flippers:
                 f.go(display, ball)

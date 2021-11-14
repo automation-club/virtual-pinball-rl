@@ -38,10 +38,11 @@ flipper_state = None
 
 
 def make_observation(display):
+    # TODO: Fix screen capture method (not capturing ball and flippers)
     string_image = pygame.image.tostring(display, 'RGB')
     tmp_surf = pygame.image.fromstring(string_image, (config.gameW, config.gameH), 'RGB')
     image_arr = pygame.surfarray.array3d(tmp_surf)
-
+    image_arr = image_arr.transpose((1, 0, 2))
     return image_arr
 
 
